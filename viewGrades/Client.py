@@ -1,3 +1,7 @@
+"""
+Author: Gaspard Baye
+Github: bayegaspard
+"""
 from Factory import read_factory
  
 def main():

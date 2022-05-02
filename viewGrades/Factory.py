@@ -1,5 +1,12 @@
+"""
+Author: Gaspard Baye
+Github: bayegaspard
+"""
+
 from abc import abstractmethod
 from SecureContext import SecureChecks
+
+import emoji
 
 class ViewGrades():
     """Badic representation of view grades"""
@@ -49,18 +56,26 @@ def read_factory():
     
     factories = {
         "notLoggedIn" : ViewGradesNotLoggedInFactory(),
-        "atudtent" : ViewGradesStudentFactory(),
+        "student" : ViewGradesStudentFactory(),
         "faculty" : ViewGradesFacultyFactory(),
         "admin" : ViewGradesAdminFactory()
     }
+    whitelist = ["admin", "student","faculty"]
     while True:
         Creds = input("input credentials (username:password) :")
         Creds = Creds.split(":")
         print(Creds)
         user = SecureChecks.secureChecks(Creds)
         if user in factories:
+            if str(user) in whitelist:
+                print(emoji.emojize("All security checks passed :check_mark_button: ! SUCCESS !"))
+            else:
+                print(emoji.emojize("Security checks failed! :cross_mark:"))
             return factories[user]
         print(f"Unknown user: {user}.")
 
-factory = read_factory()
-factory.viewGrades()
+
+#check mark button => good
+#fire=>fire
+#cross mark => Failed
+read_factory()

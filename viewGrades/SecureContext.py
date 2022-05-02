@@ -1,3 +1,7 @@
+"""
+Author: Gaspard Baye
+Github: bayegaspard
+"""
 from secureStrategy import *
 
 class SecureChecks():
