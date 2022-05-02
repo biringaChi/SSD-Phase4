@@ -74,8 +74,3 @@ def read_factory():
             return factories[user]
         print(f"Unknown user: {user}.")
 
-
-#check mark button => good
-#fire=>fire
-#cross mark => Failed
-read_factory()

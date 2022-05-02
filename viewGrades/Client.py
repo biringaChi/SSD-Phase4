@@ -2,11 +2,11 @@
 Author: Gaspard Baye
 Github: bayegaspard
 """
-from Factory import read_factory
+import Factory
  
 def main():
     """Main function"""
-    factory = read_factory()
+    factory = Factory.read_factory()
     factory.viewGrades()
 
 if __name__ == "main":
