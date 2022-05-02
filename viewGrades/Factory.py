@@ -54,10 +54,13 @@ def read_factory():
         "admin" : ViewGradesAdminFactory()
     }
     while True:
-        Creds = input("input credentials :")
+        Creds = input("input credentials (username:password) :")
+        Creds = Creds.split(":")
+        print(Creds)
         user = SecureChecks.secureChecks(Creds)
         if user in factories:
             return factories[user]
         print(f"Unknown user: {user}.")
 
-
+factory = read_factory()
+factory.viewGrades()

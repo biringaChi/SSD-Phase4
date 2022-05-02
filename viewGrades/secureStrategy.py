@@ -1,28 +1,30 @@
 
 class CheckCreds():
     """Strategy to check users roles for validation"""
-    def do_creds_checks(self,Creds):
-        if Creds[0]==None and Creds[1]==None:
-            return "notLoggedIn"
-        elif Creds[0]=="admin" and Creds[1]=="admin":
+    def do_creds_checks(Creds):
+        print("performing user credential checks ....")
+        if str(Creds[0])=="admin" and str(Creds[1])=="admin":
             return "admin"
-        elif Creds[0]=="student" and Creds[1]=="student":
+        elif str(Creds[0])=="student" and str(Creds[1])=="student":
             return "student"
-        elif Creds[0]=="faculty" and Creds[1]=="faculty":
+        elif str(Creds[0])=="faculty" and str(Creds[1])=="faculty":
             return "faculty"
         else:
-            return "Unknown error !"
+            return "notLoggedIn"
 
 class CheckRoles():
     """Strategy to check users roles for validation"""
-    def do_check_roles(self, user):
+    def do_check_roles(user):
         "Method to check roles"
-        print(f"Checking role for {user}.")
-        if user == "admin":
+        print(f"Checking role for {user} ......")
+        if str(user) == "admin":
             return "admin"
-        elif user == "student":
+        elif str(user) == "student":
             return "student"
-        elif user=="faculty":
+        elif str(user)=="faculty":
             return "faculty"
         else:
             return "Not a valid user !"
+
+# Creds = ['admin','admin']
+# print(type(CheckCreds.do_creds_checks(Creds)))
