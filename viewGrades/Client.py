@@ -10,5 +10,4 @@ def main():
     factory.viewGrades()
 
 if __name__ == "__main__":
-    print("hello")
     main()
