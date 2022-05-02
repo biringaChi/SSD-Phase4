@@ -12,7 +12,7 @@ class ViewGrades():
     """Badic representation of view grades"""
     @abstractmethod
     def viewGrades():
-        """view grades method"""
+        """view grades abstract method"""
 
 class ViewGradesNotLoggedInFactory(ViewGrades):
     """
@@ -64,7 +64,6 @@ def read_factory():
     while True:
         Creds = input("input credentials (username:password) :")
         Creds = Creds.split(":")
-        print(Creds)
         user = SecureChecks.secureChecks(Creds)
         if user in factories:
             if str(user) in whitelist:

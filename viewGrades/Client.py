@@ -9,5 +9,6 @@ def main():
     factory = Factory.read_factory()
     factory.viewGrades()
 
-if __name__ == "main":
+if __name__ == "__main__":
+    print("hello")
     main()
