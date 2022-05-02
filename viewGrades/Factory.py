@@ -65,11 +65,16 @@ def read_factory():
         Creds = input("input credentials (username:password) :")
         Creds = Creds.split(":")
         user = SecureChecks.secureChecks(Creds)
-        if user in factories:
-            if str(user) in whitelist:
-                print(emoji.emojize("All security checks passed :check_mark_button: ! SUCCESS !"))
-            else:
-                print(emoji.emojize("Security checks failed! :cross_mark:"))
+        if len(Creds)!=2:
+            print("Please input your username and password in this format , username:password")
+        else:
+            if user in factories:
+                if str(user) in whitelist:
+                    print(emoji.emojize("All security checks passed :check_mark_button: ! SUCCESS !"))
+                else:
+                    print(emoji.emojize("Security checks failed! :cross_mark:"))
             return factories[user]
+            
+
         print(f"Unknown user: {user}.")
 

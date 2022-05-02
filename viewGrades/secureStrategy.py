@@ -24,7 +24,7 @@ class CheckRoles():
     """Strategy to check users roles for validation"""
     def do_check_roles(user):
         "Method to check roles"
-        print(emoji.emojize(f"Checking role for {user}  :stopwatch:......"))
+        print(emoji.emojize(f"Checking role  :stopwatch:......"))
         if str(user) == "admin":
             return "admin"
         elif str(user) == "student":
@@ -34,5 +34,3 @@ class CheckRoles():
         else:
             return "Not a valid user !"
 
-# Creds = ['','faculty']
-# print(type(CheckCreds.do_creds_checks(Creds)))
