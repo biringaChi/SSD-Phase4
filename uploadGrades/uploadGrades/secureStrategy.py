@@ -53,11 +53,12 @@ class CheckFileExtension():
     def do_check_extension(file_path):
        # file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
        # print(file_path)
-        CheckFileSize.do_check_size(file_path)
+        
         ext = os.path.splitext(file_path)[-1].lower()
-        if ext == ".csv":
+        if ext == ".csv" and CheckFileSize.do_check_size(file_path) =="valid":
             return "valid"
         else:
             return "InValidFile"
-#print(CheckFileExtension.do_check_extension())
+#file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
+#print(CheckFileExtension.do_check_extension(file_path))
 
