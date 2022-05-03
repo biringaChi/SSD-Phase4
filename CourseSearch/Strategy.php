@@ -4,7 +4,7 @@
 * Github: biringaChi
 */
 
-namespace CourseSearch;
+error_reporting(E_ALL & ~E_NOTICE);
 
 interface Strategy {
 	public function validateForTypeFormat($semester, $department, $coursename, $courseid);	 

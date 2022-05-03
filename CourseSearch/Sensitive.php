@@ -4,18 +4,26 @@
 * Github: biringaChi
 */
 
-namespace CourseSearch;
-include("Strategy.php");
+error_reporting(E_ALL & ~E_NOTICE);
+include_once("Strategy.php");
 
-class Role implements Strategy {
+class Sensitive implements Strategy {
 	/**
-	 * Secure Role.
-	 * This module assigns the only CourseSearch and CourseEnroll module to a student
+	 * Handles Sensitive Data.
+	 * This module clears input fields sensitive data
 	 */
 	
+	public function clearSensitiveInfo($coursename, $courseid, $search) {		
+		if(isset($search)) {
+			$coursename = false;
+			$courseid = false;
+			reset($coursname, $courseid);
+		}
+		return true;
+	}
+
 	public function secureRole() {
-		// if paramter is set, assign only courseSearch() and courseEnroll() responsibilities
-		echo "Hello secure role";
+		null;
 	}
 
 	public function validateForTypeFormat($semester, $department, $coursename, $courseid) {
@@ -38,10 +46,6 @@ class Role implements Strategy {
 	}
 
 	public function validateForCrossSiteRequestForgery() {
-		null;
-	}
-
-	public function clearSensitiveInfo($coursename, $courseid, $button) {
 		null;
 	}
 }

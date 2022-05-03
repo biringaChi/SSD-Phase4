@@ -3,10 +3,13 @@
 * Author: Chidera Biringa
 * Github: biringaChi
 */
-
+error_reporting(E_ALL & ~E_NOTICE);
 include_once "SecureStrategy.php";
 
 class SecureContext {
+	/**
+	 * Context class delegates operations to the SecureStragey interface
+	 */
 	public SecureStrategy $secureStrategy;
 
 	public function __construct(SecureStrategy $secureStrategy) {
@@ -23,6 +26,10 @@ class SecureContext {
 
 	public function executeValidateCrossSiteScripting($semester, $department, $coursename, $courseid) {
 		return $this->strategy->validateForCrossSiteScripting($semester, $department, $coursename, $courseid);
+    }
+	
+	public function executeValidateCodeInjection($semester, $department, $coursename, $courseid) {
+		return $this->strategy->validateCodeInjection($semester, $department, $coursename, $courseid);
     }
 
 	public function executeValidateForSQLInjection($semester, $coursename, $db) {

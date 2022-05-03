@@ -4,8 +4,12 @@
 * Github: biringaChi
 */
 
+error_reporting(E_ALL & ~E_NOTICE);
 
 interface SecureStrategy {
+	/**
+	 * An interface class that defines a collection of “secure algorithms” implemented by concrete strategies
+	 */
 	public function validateForTypeFormat($semester, $department, $coursename, $courseid);	 
 	public function whitelistingFields($semester, $department, $coursename, $courseid);
 	public function validateForCrossSiteScripting($semester, $department, $coursename, $courseid);
@@ -24,7 +28,6 @@ class InputValidation implements SecureStrategy {
 	 * Whitelisting, Cross-site Scripting, Cross-site Request Forgery, Code Injection
 	 */
 
-	public function validateForCodeInjection($semester, $department, $coursename, $courseid) {null;}
 	public function clearSensitiveInfo($coursename, $courseid, $button) {null;}
 	public function secureRole() {null;}
 	
@@ -60,8 +63,8 @@ class InputValidation implements SecureStrategy {
 		// Validates inputs for Cross-site scripting
 		echo "Validating for cross-site scripting...";
 		foreach(array($semester, $department, $coursename, $courseid) as $filter) {
-			htmlspecialchars($filter);
-			// header("Content-Security-Policy: default-src 'self'");
+			$filter = htmlspecialchars($filter);
+			header("Content-Security-Policy: default-src 'self'");
 		}
 		return true;
 	}
@@ -93,7 +96,14 @@ class InputValidation implements SecureStrategy {
 		}
 		return false;
 	}
+
+	public function validateForCodeInjection($semester, $department, $coursename, $courseid) {
+		// Already solved when validation for type, format and whitelist paramters
+			null;
+		}
 }
+
+
 
 class Role implements SecureStrategy {
 	/**
@@ -120,10 +130,11 @@ class Sensitive implements SecureStrategy {
 	 */
 
 	public function clearSensitiveInfo($coursename, $courseid, $button) {
+		echo "Validating for sensitive information...";
 		if(isset($search)) {
 			$coursename = false;
 			$courseid = false;
-			// reset() --> reset form 
+			reset($coursname, $courseid);
 		}
 		return true;
 	}

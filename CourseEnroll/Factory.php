@@ -3,8 +3,12 @@
 * Author: Chidera Biringa
 * Github: biringaChi
 */
+error_reporting(E_ALL & ~E_NOTICE);
 
 interface Factory {
+	/**
+	 * An interface class tasked with creating security strategies implemented by ConcreteFactory
+	 */
 	public function getSecureStrategy(string $strategy);
 }
 

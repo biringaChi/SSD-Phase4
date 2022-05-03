@@ -4,7 +4,8 @@
 * Github: biringaChi
 */
 
-namespace CourseSearch;
+error_reporting(E_ALL & ~E_NOTICE);
+
 include_once("Strategy.php");
 
 class InputValidation implements Strategy {
@@ -50,8 +51,8 @@ class InputValidation implements Strategy {
 		// Validates inputs for Cross-site scripting
 		echo "Validating for cross-site scripting...";
 		foreach(array($semester, $department, $coursename, $courseid) as $filter) {
-			htmlspecialchars($filter);
-			// header("Content-Security-Policy: default-src 'self'");
+			$filter = htmlspecialchars($filter, ENT_QUOTES, "UTF-8");
+			header("Content-Security-Policy: default-src 'self'");
 		}
 		return true;
 	}
@@ -86,6 +87,7 @@ class InputValidation implements Strategy {
 
 	public function validateForCodeInjection($semester, $department, $coursename, $courseid) {
 		// Validates inputs for Code Injection
+		// Already solved when validation for type, format and whitelist paramters
 		null;
 	}
 }

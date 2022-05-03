@@ -4,12 +4,18 @@
 * Github: biringaChi
 */
 
-namespace CourseSearch;
-include "InputValidation.php";
-include "Role.php";
-include "Sensitive.php";
+error_reporting(E_ALL & ~E_NOTICE);
+
+include_once "Role.php";
+include_once "Sensitive.php";
+include_once "InputValidation.php";
+require_once "../src/DBController.php";
 
 class Context {
+	/**
+	 * Context class delegates operations to the AbstractStrategy interface
+	 */
+
 	public Strategy $strategy;
 
 	public function __construct($semester, $department, $coursename, $courseid, $db) {
@@ -23,14 +29,14 @@ class Context {
 	public function securityContext(Strategy $strategy) {
 		$security_checks = [];
 		$this->strategy = $strategy;
+		
 		if(isset($strategy)) {
 			$type_format = $this->strategy->validateForTypeFormat($this->semester, $this->department, $this->coursename, $this->courseid);
 			$whitelist_fields = $this->strategy->whitelistingFields($this->semester, $this->department, $this->coursename, $this->courseid);
 			$xss = $this->strategy->validateForCrossSiteScripting($this->semester, $this->department, $this->coursename, $this->courseid);
 			$sql_injection = $this->strategy->validateForSQLInjection($this->semester, $this->coursename, $this->db);
 			$csrf = $this->strategy->validateForCrossSiteRequestForgery();
-
-			array_push($security_checks, $type_format, $whitelist_fields, $xss, $csrf);
+			array_push($security_checks, $type_format, $whitelist_fields, $xss, $csrf, $sql_injection);
 		}
 		if (!in_array("1", $security_checks)) {
 			echo "Something went wrong";
@@ -39,7 +45,7 @@ class Context {
     }
 }
 
-$db;
+$db = null;
 $semester = $_POST["semester"];
 $department = $_POST["department"];
 $coursename = $_POST["coursename"];
