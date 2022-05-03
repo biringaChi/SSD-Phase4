@@ -4,6 +4,7 @@ import emoji
 import os
 import sys
 from pathlib import Path
+
 class CheckCreds():
     """Strategy to check users roles for validation"""
     def do_creds_checks(Creds):
@@ -37,10 +38,10 @@ class CheckRoles():
 
 class CheckFileSize():
     """Strategy to check file size """
-    def do_check_size():
-        file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
+    def do_check_size(file_path):
+        #file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
         #print(file_path)
-        size = os.stat("C:\\Users\\chith\\Desktop\\data.csv").st_size
+        size = os.stat(file_path).st_size
         #print(os.stat("C:\\Users\\chith\\Desktop\\data.csv").st_size)
         if size < 5000: # 5kb
             return "valid"
@@ -49,9 +50,10 @@ class CheckFileSize():
 #print(CheckFileSize.do_check_size())
 class CheckFileExtension():
     """Strategy to check file Extension"""
-    def do_check_extension():
-        file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
+    def do_check_extension(file_path):
+       # file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
        # print(file_path)
+        CheckFileSize.do_check_size(file_path)
         ext = os.path.splitext(file_path)[-1].lower()
         if ext == ".csv":
             return "valid"

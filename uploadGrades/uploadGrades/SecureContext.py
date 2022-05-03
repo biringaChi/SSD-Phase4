@@ -8,8 +8,5 @@ class SecureChecks():
         return CheckRoles.do_check_roles(CheckCreds.do_creds_checks(Creds))
 
 class SecureFileChecks():       
-    def secureFileChecks():
-        return CheckFileExtension.do_check_extension()
-class SecureFileSize():
-    def securefilesize():
-        return CheckFileSize.do_check_size()
+    def secureFileChecks(file_path):
+        return CheckFileExtension.do_check_extension(file_path)
