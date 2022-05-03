@@ -66,14 +66,13 @@ def read_factory():
             print("Please input your username and password in this format , username:password")
         else:
             if user in factories:
-                print("user...")
                 file_path = input(r"please specify file path in the format (C:\\Users\\chith\\Desktop\\data.csv):")
                 if str(user) in whitelist and SecureFileChecks.secureFileChecks(file_path)=="valid":
                     print(emoji.emojize("All security checks passed :check_mark_button: ! SUCCESS !"))
+                    return factories[user]
                 else:
                     print(emoji.emojize("Security checks failed! :cross_mark:"))
-            return factories[user]
             
 
-        print(f"Unknown user: {user}.")
+        print(f"Failed oparations ! ")
 
